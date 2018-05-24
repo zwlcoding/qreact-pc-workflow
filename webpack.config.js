@@ -11,10 +11,12 @@ const es3ifyPlugin = require('es3ify-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin; //提取公共代码块插件
-
+const ZipPlugin = require('zip-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const __viewList = require('./cli/getViewList');   //页面配置
 const __versionHash = require('./cli/getVersionHash')
+
 
 
 const __DOMAIN = pkg.domain
@@ -35,6 +37,7 @@ const postcssConfig = {
 
 let outputPath = './dev' //输出目录
 
+
 //配置css 跟 js 的最终指向路径
 let publicPathVal = '/'
 //图片输出路径
@@ -48,7 +51,7 @@ let envSts = process.env.NODE_ENV === 'production' ? true : false
 
 //根据环境替换路径
 if (envSts) {
-  outputPath = './dist'
+  outputPath = './build'
   publicPathVal = `//${__DOMAIN}/`
   cssPathVal = `${__versionHash}/css/[name].min.css`
   imgPathVal = `${__versionHash}/static/images/[name].[ext]`
@@ -100,7 +103,7 @@ let workConfig = {
         test: /\.(png|jpg|gif)$/,
         loader: 'url-loader',
         query: {
-          limit: 10240,
+          limit: 1,
           name: imgPathVal
         }
       },
@@ -120,9 +123,15 @@ let workConfig = {
     })];
   },
   plugins: [
-    //提取css并配置文件名
-    new ExtractTextPlugin(cssPathVal),
+
     new es3ifyPlugin(),
+    new ExtractTextPlugin(cssPathVal),
+
+    //提取css并配置文件名
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': envSts ? JSON.stringify('production') : JSON.stringify('development')
+    })
+
   ],
   devServer: {
     disableHostCheck: true,
@@ -188,9 +197,7 @@ if (envSts) {
 
   workConfig.plugins = (workConfig.plugins || []).concat([
 
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
+    new CleanWebpackPlugin(path.join(__dirname,'./dist')),
 
     new webpack.BannerPlugin(`power by ${__DOMAIN} ==> ${__AUTHOR} ==> version by ${__versionHash}`),
 
@@ -207,7 +214,12 @@ if (envSts) {
 
     }),
 
-    new ImageminPlugin()
+    new ImageminPlugin(),
+
+    new ZipPlugin({
+      path:path.join(__dirname,'./dist'),
+      filename: 'dist.zip'
+    })
 
   ])
 

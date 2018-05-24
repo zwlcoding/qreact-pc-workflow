@@ -21,7 +21,7 @@ export default class App extends React.Component {
               test: Math.random() * 1000
             })
           }}>
-          222222 什么鬼啊。这个竟然可以的啊？？？ fuck
+          这个其实是直接 IE8 以下的浏览器的，page 22222
         </div>
         <div>{this.state.test}</div>
       </div>

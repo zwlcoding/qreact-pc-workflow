@@ -17,7 +17,7 @@ let viewList = {
 routerConfig.map((routerItem) => {
   let viewKey = routerItem.from.replace('/', '')
   viewList.entry[viewKey] = `./src/views/${viewKey}/${viewKey}.js`
-  viewList.title[viewKey] = `唯品支付-${routerItem.title}`
+  viewList.title[viewKey] = `${routerItem.title}`
   viewList.chunk.push(viewKey)
 })
 

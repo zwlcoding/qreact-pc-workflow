@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server  --watch-poll --inline --hot --progress --open --host 0.0.0.0 --port 9000",
-    "ie8": "webpack-dev-server --watch-poll --progress --open --host 0.0.0.0 --port 9000",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server  --watch-poll --inline --hot --progress --open --host 127.0.0.1 --port 9000",
+    "ie8": "webpack-dev-server --watch-poll --progress --open --host 127.0.0.1 --port 9001",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "create": "node ./cli/createView.js"
   },
@@ -22,6 +22,7 @@
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
     "colors": "^1.2.4",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
@@ -41,7 +42,8 @@
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
     "webpack": "1.15.0",
-    "webpack-dev-server": "1.16.5"
+    "webpack-dev-server": "1.16.5",
+    "zip-webpack-plugin": "^1.1.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",

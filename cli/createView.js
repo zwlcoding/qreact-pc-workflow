@@ -16,6 +16,7 @@ const colors = require('colors')
 const logColorConfig = require('./logColor.config')
 colors.setTheme(logColorConfig)
 
+//交互式创建新的 view
 inquirer.prompt([
   {
     type: 'input',
