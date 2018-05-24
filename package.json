@@ -10,8 +10,8 @@
     "create": "node ./cli/createView.js"
   },
   "keywords": [],
-  "author": "Por.zhang",
-  "domain": "//you.delopy.com",
+  "author": "Por.Zhang",
+  "domain": "you.delopy.com",
   "license": "ISC",
   "devDependencies": {
     "app-root-path": "^2.0.1",

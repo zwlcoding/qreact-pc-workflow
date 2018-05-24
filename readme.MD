@@ -31,6 +31,10 @@
       |-test.js 【注意】这个JS的名称，必须与目录名称保持一致
 |-index.html  //构建模板,如果需要插入CDN的js什么的，可以直接写在这里
 |-webpack.config.js //编译配置
+|-package.json 编译需依赖该配置文件下的几个字段
+  |- version  构建的版本号hash依赖这个值
+  |- author   静态资源注释需要依赖这个字段/*! power by you.delopy.com ==> Por.Zhang ==> version by 47cd76e4 */
+  |- domain   会影响html中，CSS中，静态资源的加载域名
 ```
 
 
@@ -96,6 +100,10 @@ Support ie8 +
       |-test.js [Note] The name of this JS must be consistent with the directory name.
 |-index.html //build template, if you need to insert CDN's js, you can write it directly here
 |-webpack.config.js //Compile configuration
+|-package.json Compile depends on several fields under the configuration file
+   |- version Build version hash depends on this value
+   |- author Static resource annotations need to depend on this field /*! power by you.delopy.com ==> Por.Zhang ==> version by 47cd76e4 */
+   |- domain will affect html, CSS, static resource loading domain
 ```
 
 
